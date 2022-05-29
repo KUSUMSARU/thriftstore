@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const User = require("../models/User.js");
-const url='mongodb+srv://agile:agile@cluster0.qtsfz.mongodb.net/AgileThriftStore?retryWrites=true&w=majority';
+const url='mongodb://localhost:27017/thrift';
 
 beforeAll(async()=>{
     await mongoose.connect(url, {

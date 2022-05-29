@@ -7,6 +7,7 @@ import { LayoutContext } from "../index";
 import { isAdmin } from "../auth/fetchApi";
 
 const Navber = (props) => {
+  // const [admin, setAdmin] = useState('')
   const history = useHistory();
   const location = useLocation();
 
@@ -41,15 +42,15 @@ const Navber = (props) => {
             </span>
             <span
               className="hover:bg-gray-200 px-4 py-3 rounded-lg font-light tracking-widest hover:text-gray-800 cursor-pointer"
-              onClick={(e) => history.push("/blog")}
+              onClick={(e) => history.push("/resell")}
             >
-              Blog
+              Re-sell
             </span>
             <span
               className="hover:bg-gray-200 px-4 py-3 rounded-lg font-light tracking-widest hover:text-gray-800 cursor-pointer"
               onClick={(e) => history.push("/contact-us")}
             >
-              Contact us
+              About us
             </span>
           </div>
           <div className="col-span-2 lg:hidden flex justify-items-stretch	 items-center">
@@ -73,7 +74,7 @@ const Navber = (props) => {
               style={{ letterSpacing: "0.10rem" }}
               className="flex items-left text-center font-bold uppercase text-gray-800 text-2xl cursor-pointer px-2 text-center"
             >
-              Hayroo
+              Thrift Store
             </span>
           </div>
           <div
@@ -253,8 +254,10 @@ const Navber = (props) => {
                       </Fragment>
                     ) : (
                       <Fragment>
+                       
                         <li className="flex flex-col text-gray-700 w-48 shadow-lg">
-                          <span
+                      
+                           <span
                             onClick={(e) => history.push("/admin/dashboard")}
                             className="flex space-x-2 py-2 px-8 hover:bg-gray-400 cursor-pointer"
                           >
@@ -281,7 +284,7 @@ const Navber = (props) => {
                               </svg>
                             </span>
                             <span>Admin Panel</span>
-                          </span>
+                          </span> 
                           <span
                             onClick={(e) => logout()}
                             className="flex space-x-2 py-2 px-8 hover:bg-gray-400 cursor-pointer"

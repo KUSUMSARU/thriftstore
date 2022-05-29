@@ -1,8 +1,13 @@
 import React, { Fragment, useState, useContext } from "react";
 import { loginReq } from "./fetchApi";
 import { LayoutContext } from "../index";
+import { useHistory } from "react-router-dom";
+import { isAdmin } from "../auth/fetchApi";
 
 const Login = (props) => {
+  
+const history = useHistory();
+
   const { data: layoutData, dispatch: layoutDispatch } = useContext(
     LayoutContext
   );
@@ -16,13 +21,26 @@ const Login = (props) => {
 
   const alert = (msg) => <div className="text-xs text-red-500">{msg}</div>;
 
-  const formSubmit = async () => {
-    setData({ ...data, loading: true });
+  const formSubmit = async (e) => {
+    e.preventDefault()
+
+    //console.log("kkkk")
+  //   if(data.email==="a" && data.password ==="a"){
+  //     window.location.href = "/admin/dashboard";
+  //     window.localStorage.clear();
+  //     // window.location.replace("/admin/dashboard");
+  // //    console.log("abc")
+  //  history.push("/admin/dashboard")
+  //   }
+  //   else{
+      setData({ ...data, loading: true });
     try {
-      let responseData = await loginReq({
+      const responseData = await loginReq({
         email: data.email,
         password: data.password,
+      
       });
+      console.log(responseData)
       if (responseData.error) {
         setData({
           ...data,
@@ -34,10 +52,22 @@ const Login = (props) => {
         setData({ email: "", password: "", loading: false, error: false });
         localStorage.setItem("jwt", JSON.stringify(responseData));
         window.location.href = "/";
+
       }
+      else if(responseData.userRole>1){
+        setData({ email: "", password: "", loading: false, error: false });
+        localStorage.setItem("jwt", JSON.stringify(responseData));
+        window.location.href = "/admin/dashboard";
+        history.push("/admin/dashboard")
+
+      }
+      console.log(responseData)
+
     } catch (error) {
       console.log(error);
     }
+    
+    
   };
 
   return (
@@ -104,7 +134,7 @@ const Login = (props) => {
           </a>
         </div>
         <div
-          onClick={(e) => formSubmit()}
+          onClick={ formSubmit}
           style={{ background: "#303031" }}
           className="font-medium px-4 py-2 text-white text-center cursor-pointer"
         >

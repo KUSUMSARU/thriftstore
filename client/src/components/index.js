@@ -14,6 +14,7 @@ import { DashboardAdmin, Categories, Products, Orders } from "./admin";
 import { UserProfile, UserOrders, SettingUser } from "./shop/dashboardUser";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import resell from "./shop/layout/resell";
 
 /* Routing All page will be here */
 const Routes = (props) => {
@@ -74,6 +75,12 @@ const Routes = (props) => {
           exact={true}
           path="/user/setting"
           component={SettingUser}
+        />
+
+        <ProtectedRoute
+          exact={true}
+          path="/resell"
+          component={resell}
         />
         {/* User Dashboard End */}
 
